@@ -1,28 +1,17 @@
-﻿var numberString = string.Empty;
+﻿using Shared;
+
+var answer = string.Empty;
 do
 {
-    Console.Write("Escribe un número entero o 'salir' para salir ");
-    numberString = Console.ReadLine();
-    if(numberString!.ToLower() == "salir")
+    var number = ConsoleExtension.GetInt("Ingrese número entero: ");
+    if (number % 2 == 0)
     {
-        continue;
-    }
-    var numberInt = 0;
-    if (int.TryParse(numberString, out numberInt))
-    {
-        if (numberInt % 2 == 0)
-        {
-            Console.WriteLine($"{numberInt} es par");
-        }
-        else
-        {
-            Console.WriteLine($"{numberInt} es impar");
-        }
-
+        Console.WriteLine($"El número {number}, es par.");
     }
     else
     {
-        Console.WriteLine($"{numberString} no es un número entero");
+        Console.WriteLine($"El número {number}, es impar");
     }
+    answer = ConsoleExtension.GetValidOptions("¿Desea continuar [S]í, [N]o?", new List<string> { "s", "n" });
 }
-while (numberString.ToLower() != "salir");
+while (answer.ToLower() == "s");
