@@ -5,16 +5,25 @@
         public static int GetInt(string message)
         {
             Console.Write(message);
-            var input = Console.ReadLine();
-            if (int.TryParse(input, out var result))
+            var numberString = Console.ReadLine();
+            var numberInt = 0;
+            if (int.TryParse(numberString, out numberInt))
             {
-                return result;
+                return numberInt;
             }
-            else
+
+            return 0;
+        }
+
+        public static string? GetValidOptions(string message, List<string> options)
+        {
+            Console.Write(message);
+            var answer = Console.ReadLine();
+            if (options.Any(x => x.Equals(answer, StringComparison.CurrentCultureIgnoreCase)))
             {
-                Console.WriteLine("Invalid input. Please enter a valid integer.");
-                return GetInt(message);
+                return answer;
             }
+            return null;
         }
     }
 }
