@@ -2,17 +2,34 @@
 var response = string.Empty;
 do
 {
+    var currentYear = DateTime.Now.Year;
+    var message = string.Empty;
+    
+    
+
     Console.Write("Ingrese un año: ");
     var y = Console.ReadLine();
     if (int.TryParse(y, out int year))
     {
-        if (year % 4 == 0 && year % 100 != 0 || year % 4 == 0 && year % 100 == 0 && year % 400 == 0)
+        if (year == currentYear)
         {
-            Console.WriteLine($"El año {year} es bisiesto");
+            message = "es";
+        }
+        else if (year < currentYear)
+        {
+            message = "fue";
         }
         else
         {
-            Console.WriteLine($"El año {year} no es bisiesto");
+            message = "será";
+        }
+        if (year % 4 == 0 && year % 100 != 0 || year % 4 == 0 && year % 100 == 0 && year % 400 == 0)
+        {
+            Console.WriteLine($"El año {year} {message} bisiesto");
+        }
+        else
+        {
+            Console.WriteLine($"El año {year} no {message} bisiesto");
         }
 
         Console.Write("Desea continuar? Si, No: ");
@@ -25,9 +42,7 @@ do
         {
             Console.WriteLine("Ingresar una respuesta no válida");
             response = "si";
-
         }
-
     }
     else
     {
