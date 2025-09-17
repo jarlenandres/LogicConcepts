@@ -17,6 +17,12 @@ do
 
     if (int.TryParse(num1, out n1) && int.TryParse(num2, out n2) && int.TryParse(num3, out n3))
     {
+        if (n1 == n2 || n1 == n3 || n2 == n3)
+        {
+            Console.WriteLine("Los números deben diferentes, vuelve a empezar");
+            Console.WriteLine();
+            continue;
+        }
         if (n1 > n2 && n1 > n3)
         {
             if (n2 > n3)
