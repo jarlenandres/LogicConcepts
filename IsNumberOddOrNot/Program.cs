@@ -1,27 +1,23 @@
-﻿var numString = string.Empty;
+﻿using Shared;
+
+var answer = string.Empty;
+var options = new List<string> { "s", "n" };
+Console.WriteLine("Programa para determinar si un número es par o impar.");
+Console.WriteLine();
 do
 {
-    Console.WriteLine("Ingrese un número entero o 'S' para salir");
-    numString = Console.ReadLine();
-    if (numString!.ToLower() == "s")
+    var number = ConsoleExtension.GetInt("Ingrese un número entero: ");
+    if (number % 2 == 0)
     {
-        continue;
-    }
-    var num = 0;
-    if (int.TryParse(numString, out num))
-    {
-        if (num % 2 == 0)
-        {
-            Console.WriteLine($"El número, {num} es par");
-        }
-        else
-        {
-            Console.WriteLine($"El número {num} es impar");
-        }
+        Console.WriteLine($"El número, {number} es par");
     }
     else
     {
-        Console.WriteLine($"{numString} no es un número entero");
+        Console.WriteLine($"El número {number} es impar");
     }
-} while (numString!.ToLower() != "s");
+    do
+    {
+        answer = ConsoleExtension.GetValidOptions("¿Desea continuar? (S/N): ", options);
+    } while (!options.Any(x => x.Equals(answer, StringComparison.OrdinalIgnoreCase)));
+} while (answer!.Equals("s", StringComparison.CurrentCultureIgnoreCase));
 Console.WriteLine("Hasta la próxima!");

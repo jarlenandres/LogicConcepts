@@ -1,44 +1,34 @@
-﻿var num1 = string.Empty;
-var num2 = string.Empty;
-var num3 = string.Empty;
-var t = string.Empty;
+﻿using Shared;
+
+var answer = string.Empty;
+var options = new List<string> { "s", "n" };
+Console.WriteLine("Programa para determinar el número mayor entre tres números.");
+Console.WriteLine();
 do
 {
-    Console.Write("Ingrese primer número ");
-    num1 = Console.ReadLine();
-    Console.Write("Ingrese tercer número ");
-    num2 = Console.ReadLine();
-    Console.Write("Ingrese segundo número ");
-    num3 = Console.ReadLine();
-    var n1 = 0;
-    var n2 = 0;
-    var n3 = 0;
+    var n1 = ConsoleExtension.GetInt("Ingrese el primer número: ");
+    var n2 = ConsoleExtension.GetInt("Ingrese el segundo número: ");
+    var n3 = ConsoleExtension.GetInt("Ingrese el tercer número: ");
 
-    if (int.TryParse(num1, out n1) && int.TryParse(num2, out n2) && int.TryParse(num3, out n3))
+    if (n1 > n2 && n1 > n3)
     {
-        if (n1 > n2 && n1 > n3)
-        {
-            Console.WriteLine($"El número mayor es {n1}");
-        }
-        else if (n2 > n1 && n2 > n3)
-        {
-            Console.WriteLine($"El número mayor es {n2}");
-        }
-        else if (n3 > n1 && n3 > n2)
-        {
-            Console.WriteLine($"El número mayor es {n3}");
-        }
-        else
-        {
-            Console.WriteLine("Hay números iguales");
-        }
+        Console.WriteLine($"El número mayor es {n1}");
     }
-    Console.WriteLine("Desea continuar 'S' o 'N' ");
-    t = Console.ReadLine();
-
-    if (t.ToLower() == "n")
+    else if (n2 > n1 && n2 > n3)
     {
-        continue;
+        Console.WriteLine($"El número mayor es {n2}");
     }
-} while (t!.ToLower() != "n");
+    else if (n3 > n1 && n3 > n2)
+    {
+        Console.WriteLine($"El número mayor es {n3}");
+    }
+    else
+    {
+        Console.WriteLine("Hay números iguales");
+    }
+    do
+    {
+        answer = ConsoleExtension.GetValidOptions("¿Desea continuar? (S/N): ", options);
+    } while (!options.Any(x => x.Equals(answer, StringComparison.OrdinalIgnoreCase)));
+} while (answer!.Equals("s", StringComparison.CurrentCultureIgnoreCase));
 Console.WriteLine("Hasta la próxima!");
