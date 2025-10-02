@@ -1,43 +1,39 @@
-﻿Console.WriteLine("Este programa valida si un año es Bisiesto");
+﻿using Shared;
+
+Console.WriteLine("Este programa valida si un año es Bisiesto");
 Console.WriteLine();
-var yearString = string.Empty;
-var t = string.Empty;
+var answer = string.Empty;
+var options = new List<string> { "s", "n" };
 do
 {
     var currentYear = DateTime.Now.Year;
     var message = string.Empty;
     Console.Write("Ingrese un año ");
-    yearString = Console.ReadLine();
-    var year = 0;
-
-    if (int.TryParse(yearString, out year))
+    var year = ConsoleExtension.GetInt("Ingrese un año: ");
+    if (year == currentYear)
     {
-        if (year == currentYear)
-        {
-            message = "ES";
-        }
-        else if (year > currentYear)
-        {
-            message = "SERÁ";
-        }
-        else
-        {
-            message = "FUE";
-        }
-
-        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
-        {
-            Console.WriteLine($"El año {year} {message} bisiesto");
-        }
-        else
-        {
-            Console.WriteLine($"El año {year} NO {message} bisiesto");
-        }
+        message = "ES";
     }
-    Console.WriteLine("Desea continuar 'S' o 'N' ");
-    t = Console.ReadLine();
-    if (t.ToLower() == "n")
+    else if (year > currentYear)
     {
-        continue;
+        message = "SERÁ";
     }
-} while (t!.ToLower() != "n");
+    else
+    {
+        message = "FUE";
+    }
+
+    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+    {
+        Console.WriteLine($"El año {year} {message} bisiesto");
+    }
+    else
+    {
+        Console.WriteLine($"El año {year} NO {message} bisiesto");
+    }
+    do
+    {
+        answer = ConsoleExtension.GetValidOptions("¿Desea continuar? (S/N): ", options);
+    } while (!options.Any(x => x.Equals(answer, StringComparison.OrdinalIgnoreCase)));
+} while (answer!.Equals("s", StringComparison.CurrentCultureIgnoreCase));
+Console.WriteLine("Hasta la próxima!");

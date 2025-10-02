@@ -1,61 +1,51 @@
-﻿var num1 = string.Empty;
-var num2 = string.Empty;
-var num3 = string.Empty;
-var t = string.Empty;
+﻿using Shared;
+
+var answer = string.Empty;
+var options = new List<string> { "s", "n" };
+
 Console.WriteLine("Este programa ordena tres números de mayor a menor");
+Console.WriteLine();
 do
 {
-    Console.Write("Ingrese primer número ");
-    num1 = Console.ReadLine();
-    Console.Write("Ingrese tercer número ");
-    num2 = Console.ReadLine();
-    Console.Write("Ingrese segundo número ");
-    num3 = Console.ReadLine();
-    var n1 = 0;
-    var n2 = 0;
-    var n3 = 0;
+    var num1 = ConsoleExtension.GetInt("Ingrese primer número ");
+    var num2 = ConsoleExtension.GetInt("Ingrese segundo número ");
+    var num3 = ConsoleExtension.GetInt("Ingrese segundo número ");
 
-    if (int.TryParse(num1, out n1) && int.TryParse(num2, out n2) && int.TryParse(num3, out n3))
+    if (num1 == num2 || num1 == num3 || num2 == num3)
     {
-        if (n1 == n2 || n1 == n3 || n2 == n3)
+        Console.WriteLine("Los números deben diferentes, vuelve a empezar");
+        Console.WriteLine();
+        continue;
+    }
+    if (num1 > num2 && num1 > num3)
+    {
+        if (num2 > num3)
         {
-            Console.WriteLine("Los números deben diferentes, vuelve a empezar");
-            Console.WriteLine();
-            continue;
-        }
-        if (n1 > n2 && n1 > n3)
-        {
-            if (n2 > n3)
-            {
-                Console.WriteLine($"El orden es {n1}, {n2}, {n3}");
-            }
-            else
-            {
-                Console.WriteLine($"El orden es {n1}, {n3}, {n2}");
-            }
-        }
-        else if (n2 > n1 && n2 > n3)
-        {
-            if (n1 > n3)
-            {
-                Console.WriteLine($"El orden es {n2}, {n1}, {n3}");
-            }
-            else
-            {
-                Console.WriteLine($"El orden es {n2}, {n3}, {n1}");
-            }
+            Console.WriteLine($"El orden es {num1}, {num2}, {num3}");
         }
         else
         {
-            Console.WriteLine($"El orden es {n3}, {n2}, {n1}");
+            Console.WriteLine($"El orden es {num1}, {num3}, {num2}");
         }
     }
-    Console.WriteLine("Desea continuar 'S' o 'N' ");
-    t = Console.ReadLine();
-
-    if (t.ToLower() == "n")
+    else if (num2 > num1 && num2 > num3)
     {
-        continue;
+        if (num1 > num3)
+        {
+            Console.WriteLine($"El orden es {num2}, {num1}, {num3}");
+        }
+        else
+        {
+            Console.WriteLine($"El orden es {num2}, {num3}, {num1}");
+        }
     }
-} while (t!.ToLower() != "n");
+    else
+    {
+        Console.WriteLine($"El orden es {num3}, {num2}, {num1}");
+    }
+    do
+    {
+        answer = ConsoleExtension.GetValidOptions("¿Desea continuar? (S/N): ", options);
+    } while (!options.Any(x => x.Equals(answer, StringComparison.OrdinalIgnoreCase)));
+} while (answer!.Equals("s", StringComparison.CurrentCultureIgnoreCase));
 Console.WriteLine("Hasta la próxima!");
