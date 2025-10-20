@@ -14,6 +14,18 @@
             return 0;
         }
 
+        public static decimal GetDecimal(string message)
+        {
+            Console.WriteLine(message);
+            var numString = Console.ReadLine();
+            var numberDecimal = 0m;
+            if (decimal.TryParse(numString, out numberDecimal))
+            {
+                return numberDecimal;
+            }
+            return 0m;
+        }
+
         public static string? GetValidOptions(string message, List<string> options)
         {
             Console.WriteLine(message);
@@ -24,6 +36,5 @@
             }
             return null;
         }
-
     }
 }
