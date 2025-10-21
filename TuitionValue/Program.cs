@@ -10,8 +10,10 @@ do
     var credits = ConsoleExtension.GetInt("Número de créditos: ");
     var creditsValue = ConsoleExtension.GetDecimal("Valor crédito: ");
     var stratum = ConsoleExtension.GetInt("Estrato del estudiante: ");
+
     var tuitionValue = CalculateTuitionVale(credits, creditsValue, stratum);
     var subsidy = CalculateSubsidy(stratum);
+
     Console.WriteLine($"Costo matrícula: {tuitionValue:N2}");
     Console.WriteLine($"Costo matrícula: {subsidy:N2}");
 
